@@ -5,21 +5,23 @@
 <script>
 // @ is an alias to /src
 
-import gql from "graphql-tag"; 
+import gql from "graphql-tag";
 export default {
   name: "Home",
   components: {},
   data() {
     return {
-      books: []
+      categories: []
     };
   },
   apollo: {
-    books: gql`
+    categories: gql`
       {
-        books {
-          id
-          name
+        categories {
+          data {
+            id
+            name
+          }
         }
       }
     `
