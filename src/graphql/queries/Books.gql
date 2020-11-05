@@ -1,0 +1,11 @@
+query{
+    books {
+        data 
+        {
+            id
+            title
+            author
+            image
+        }
+    }
+}
