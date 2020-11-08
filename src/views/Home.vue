@@ -53,7 +53,6 @@
 <script>
 // @ is an alias to /src
 
-import gql from "graphql-tag";
 import categoryQuery from "@/graphql/queries/Category.gql";
 import BookQuery from "@/graphql/queries/Category.gql";
 import BookFeaturedQuery from "@/graphql/queries/Category.gql";
@@ -65,33 +64,10 @@ export default {
       selectedCategory: 1,
       categories: [],
       books: [],
-      query: null
+      query: null,
     };
   },
-  apollo: {
-    categories: gql`
-      {
-        categories {
-          data {
-            id
-            name
-          }
-        }
-      }
-    `,
-    books: gql`
-      {
-        books {
-          data {
-            id
-            title
-            author
-            image
-          }
-        }
-      }
-    `
-  },
+
   methods: {
     selectedCategoryID(category) {
       if (category === "all") {
@@ -102,8 +78,8 @@ export default {
         this.query = categoryQuery;
         this.selectedCategory = category;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
