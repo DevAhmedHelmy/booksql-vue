@@ -29,8 +29,11 @@
           <div v-if="isLoading">Loading...</div>
           <div v-else>
             <div v-for="book of data.books.data" :key="book.id">
-              {{ book.id }} . {{ book.title }} {{ book.author }}
-              {{ book.image }}
+              <router-link :to="`/books/${book.id}`">
+                {{ book.id }} . {{ book.title }}
+              </router-link>
+              <div>{{book.author}}</div>
+              <img :src="book.image" alt="image">
             </div>
           </div>
         </template>
@@ -41,9 +44,10 @@
         <template slot-scope="{ result: { data, loading }, isLoading }">
           <div v-if="isLoading">Loading...</div>
           <div v-else>
-            <div v-for="book of data.books" :key="book.id">
-              {{ book.id }} . {{ book.title }} {{ book.author }}
-              {{ book.image }}
+            <div v-for="book of data.booksByFeatured" :key="book.id">
+              <router-link :to="`/books/${book.id}`">
+                {{ book.id }} . {{ book.title }}
+              </router-link>
             </div>
           </div>
         </template>
@@ -55,8 +59,9 @@
           <div v-if="isLoading">Loading...</div>
           <div v-else>
             <div v-for="book of data.category.books" :key="book.id">
-              {{ book.id }} . {{ book.title }} {{ book.author }}
-              {{ book.image }}
+              <router-link :to="`/books/${book.id}`">
+                {{ book.id }} . {{ book.title }}
+              </router-link>
             </div>
           </div>
         </template>
@@ -67,7 +72,6 @@
 
 <script>
 // @ is an alias to /src
-
 import categoriesQuery from "@/graphql/queries/Categories.gql";
 import categoryQuery from "@/graphql/queries/Category.gql";
 import BooksQuery from "@/graphql/queries/Books.gql";
@@ -80,7 +84,8 @@ export default {
       selectedCategory: "all",
       categoriesQuery,
       categoryQuery,
-      query: BooksQuery
+      BookFeaturedQuery,
+      query: BooksQuery,
     };
   },
 
@@ -94,8 +99,8 @@ export default {
         this.query = categoryQuery;
       }
       this.selectedCategory = category;
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
