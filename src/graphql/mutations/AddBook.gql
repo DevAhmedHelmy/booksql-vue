@@ -1,0 +1,22 @@
+mutation(
+        $title:String!, 
+        $author:String!,
+        $link:String,
+        $image:String,
+        $description:String,
+        $featured:Boolean, 
+        $category:Int!
+){
+  createBook(
+      title:$title, 
+      author:$author,
+      link:$link,
+      image:$image,
+      description:$description
+      featured:$featured, 
+      category_id:$category
+      ){
+    id
+    title
+  }
+}
